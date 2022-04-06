@@ -1,11 +1,15 @@
 import styled from 'styled-components/native';
-import {Platform} from 'react-native';
 
 export const StyledContainer = styled.SafeAreaView`
   flex: 1;
   padding: 5% 5%;
   background-color: #121015;
 `;
+
+export const StyledStatusBar = styled.StatusBar.attrs({
+  barStyle: 'light-content',
+  backgroundColor: '#121015',
+})``;
 
 export const StyledTitle = styled.Text`
   color: #fff;
