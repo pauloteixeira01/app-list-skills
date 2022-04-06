@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {FlatList, StatusBar} from 'react-native';
 
 import Button from '~/components/button';
 import SkillCard from '~/components/skill-card';
@@ -7,6 +7,7 @@ import SkillCard from '~/components/skill-card';
 import {
   StyledContainer,
   StyledTitle,
+  StyledGretting,
   StyledInput,
   StyledSkills,
 } from './styles';
@@ -14,6 +15,19 @@ import {
 const Home = () => {
   const [newSkill, setNewSkill] = useState('');
   const [mySkills, setMySkills] = useState([]);
+  const [greetting, setGretting] = useState('');
+
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour < 13) {
+      setGretting('Good morning!');
+    } else if (currentHour >= 13 && currentHour < 19) {
+      setGretting('Good afternoon!');
+    } else {
+      setGretting('Good evening!');
+    }
+  }, [mySkills]);
 
   const handleAddNewSkill = () => {
     setMySkills(oldState => [...oldState, newSkill]);
@@ -21,7 +35,9 @@ const Home = () => {
 
   return (
     <StyledContainer>
+      <StatusBar barStyle="light-content" backgroundColor="#121015" />
       <StyledTitle>Welcome! Paulo</StyledTitle>
+      <StyledGretting>{greetting}</StyledGretting>
       <StyledInput
         placeholder="New Skill"
         placeholderTextColor="#555"

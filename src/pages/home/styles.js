@@ -9,8 +9,14 @@ export const StyledContainer = styled.SafeAreaView`
 
 export const StyledTitle = styled.Text`
   color: #fff;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
+`;
+
+export const StyledGretting = styled.Text`
+  color: #fff;
+  font-size: 14px;
+  margin-top: 1%;
 `;
 
 export const StyledInput = styled.TextInput`
