@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, StatusBar} from 'react-native';
+import {FlatList} from 'react-native';
 
 import Button from '~/components/button';
 import SkillCard from '~/components/skill-card';
 
 import {
   StyledContainer,
+  StyledStatusBar,
   StyledTitle,
   StyledGretting,
   StyledInput,
@@ -35,7 +36,7 @@ const Home = () => {
 
   return (
     <StyledContainer>
-      <StatusBar barStyle="light-content" backgroundColor="#121015" />
+      <StyledStatusBar />
       <StyledTitle>Welcome! Paulo</StyledTitle>
       <StyledGretting>{greetting}</StyledGretting>
       <StyledInput
