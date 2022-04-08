@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ReactElement} from 'react';
 import {FlatList} from 'react-native';
 
 import Button from '~/components/button';
@@ -13,10 +13,23 @@ import {
   StyledSkills,
 } from './styles';
 
-const Home = () => {
+interface SkillDataProps {
+  id: string;
+  name: string;
+}
+
+const Home = (): ReactElement => {
   const [newSkill, setNewSkill] = useState('');
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillDataProps[]>([]);
   const [greetting, setGretting] = useState('');
+
+  const handleAddNewSkill = (): void => {
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill,
+    };
+    setMySkills(oldState => [...oldState, data]);
+  };
 
   useEffect(() => {
     const currentHour = new Date().getHours();
@@ -30,29 +43,25 @@ const Home = () => {
     }
   }, [mySkills]);
 
-  const handleAddNewSkill = () => {
-    setMySkills(oldState => [...oldState, newSkill]);
-  };
-
   return (
     <StyledContainer>
       <StyledStatusBar />
+
       <StyledTitle>Welcome! Paulo</StyledTitle>
       <StyledGretting>{greetting}</StyledGretting>
+
       <StyledInput
         placeholder="New Skill"
         placeholderTextColor="#555"
         onChangeText={setNewSkill}
       />
-
       <Button action={handleAddNewSkill} />
 
       <StyledSkills>My Skills</StyledSkills>
-
       <FlatList
         data={mySkills}
-        keyExtractor={item => item}
-        renderItem={({item}) => <SkillCard skill={item} />}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <SkillCard skill={item.name} />}
       />
     </StyledContainer>
   );
