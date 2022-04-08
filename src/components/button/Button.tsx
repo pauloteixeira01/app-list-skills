@@ -1,13 +1,13 @@
-import React, {ReactElement} from 'react';
+import React from 'react';
 
 import {ButtonProps} from './types';
 
 import {StyledButton, StyledButtonText} from './styles';
 
-const Button = ({action}: ButtonProps): ReactElement => {
+const Button = ({title, action}: ButtonProps) => {
   return (
-    <StyledButton activeOpacity={0.7} onPress={action}>
-      <StyledButtonText>Add</StyledButtonText>
+    <StyledButton onPress={action}>
+      <StyledButtonText>{title}</StyledButtonText>
     </StyledButton>
   );
 };
